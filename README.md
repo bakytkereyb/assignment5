@@ -1,4 +1,7 @@
 # IT company assignment 5
+## Student
+* Bakytkereiuly Batyrbek
+* SE-2015
 ## PostgreSQL
 ```SQL
 CREATE TABLE projects (
