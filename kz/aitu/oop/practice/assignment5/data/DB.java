@@ -4,6 +4,8 @@ import kz.aitu.oop.practice.assignment5.data.interfaces.IDB;
 import java.sql.*;
 
 public class DB implements IDB {
+
+    // overriding method to connect with database
     @Override
     public Connection getConnection() throws SQLException, ClassNotFoundException {
         String connectionUrl = "jdbc:postgresql://localhost:5432/java";

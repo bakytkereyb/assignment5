@@ -10,16 +10,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MyApplication {
+    // constant variables to control employees and projects
     private final EmployeeController emp_controller;
     private final ProjectController project_controller;
+
+    // constant variable for input system
     private final Scanner scanner;
 
+    // Constructor for creating a new MyApplication
     public MyApplication(EmployeeController emp_controller, ProjectController project_controller) {
         this.emp_controller = emp_controller;
         this.project_controller = project_controller;
         scanner = new Scanner(System.in);
     }
 
+    // method to start application
     public void start() {
         System.out.println("Hello, dear user! I am a bot from the wonderful programmer to control the database of medicine.");
         while (true) {
@@ -104,14 +109,14 @@ public class MyApplication {
         System.out.println("Write just id with spaces, for ex: '1 2 3'");
         scanner.nextLine();
         String ids[]= scanner.nextLine().split(" ");
-        List<Integer> id_list = new LinkedList<Integer>();
+        List<Integer> id_list = new LinkedList<Integer>(); // List for storing input integers
         for(int i = 0 ;i < ids.length;i++){
-            id_list.add(Integer.parseInt(ids[i]));
+            id_list.add(Integer.parseInt(ids[i])); // extracting integers and adding into list
         }
         Project project = new Project(id, name, 0);
         for (int i = 0 ;i < id_list.size(); i++) {
             Employee emp = emp_controller.getEmployeeById(id_list.get(i));
-            project.addEmployee(emp);
+            project.addEmployee(emp); // adding each employee into project
         }
         String response = project_controller.createProject(project);
         System.out.println(response);
