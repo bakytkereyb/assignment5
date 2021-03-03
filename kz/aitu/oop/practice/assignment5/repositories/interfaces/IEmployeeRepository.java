@@ -7,4 +7,5 @@ import java.util.List;
 public interface IEmployeeRepository {
     boolean createEmployee(Employee employee);
     List<Employee> getAllEmployee();
+    Employee getEmployeeById(int id);
 }

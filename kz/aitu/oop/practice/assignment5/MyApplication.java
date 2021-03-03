@@ -2,12 +2,10 @@ package kz.aitu.oop.practice.assignment5;
 
 import kz.aitu.oop.practice.assignment5.controllers.EmployeeController;
 import kz.aitu.oop.practice.assignment5.controllers.ProjectController;
-import kz.aitu.oop.practice.assignment5.entities.BackendDeveloper;
-import kz.aitu.oop.practice.assignment5.entities.Employee;
-import kz.aitu.oop.practice.assignment5.entities.FrontendDeveloper;
-import kz.aitu.oop.practice.assignment5.entities.Manager;
+import kz.aitu.oop.practice.assignment5.entities.*;
 
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -65,12 +63,12 @@ public class MyApplication {
     public void getAllEmployees() {
         List<Employee> response = emp_controller.getAllEmployee();
         for (Employee emp : response) {
-            emp.getInfo();
+            System.out.println(emp.getInfo());
         }
     }
 
     public void addEmployee() {
-        System.out.println("Write employee details in this format: 'id name address department salary");
+        System.out.println("Write employee details in this format: 'id name address department salary'");
         int id = scanner.nextInt();
         String name = scanner.next();
         String address = scanner.next();
@@ -78,17 +76,45 @@ public class MyApplication {
         int salary = scanner.nextInt();
         Employee emp;
         System.out.println("Write type-number of employee: 1) Frontend Developer; 2) Backend Developer; 3) Manager;");
-        if (scanner.nextInt() == 1) {
-            emp = new FrontendDeveloper(id, name, address, department, salary);
-        } else if (scanner.nextInt() == 2) {
-            emp = new BackendDeveloper(id, name, address, department, salary);
-        } else if (scanner.nextInt() == 3) {
-            emp = new Manager(id, name, address, department, salary);
-        } else {
-            System.out.println("Invalid Input!");
-            return;
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1: emp = new FrontendDeveloper(id, name, address, department, salary); break;
+            case 2: emp = new BackendDeveloper(id, name, address, department, salary); break;
+            case 3: emp = new Manager(id, name, address, department, salary); break;
+            default: System.out.println("Invalid Input!"); return;
         }
+
         String response = emp_controller.createEmployee(emp);
         System.out.println(response);
     }
+
+    public void getAllProjects() {
+        List<Project> response = project_controller.getAllProjects();
+        for (Project project : response) {
+            System.out.println(project.getInfo());
+        }
+    }
+
+    public void addProject() {
+        System.out.println("Write project details in this format: 'id name'");
+        int id = scanner.nextInt();
+        String name = scanner.next();
+        System.out.println("Choose employees to add them into project:");
+        getAllEmployees();
+        System.out.println("Write just id with spaces, for ex: '1 2 3'");
+        scanner.nextLine();
+        String ids[]= scanner.nextLine().split(" ");
+        List<Integer> id_list = new LinkedList<Integer>();
+        for(int i = 0 ;i < ids.length;i++){
+            id_list.add(Integer.parseInt(ids[i]));
+        }
+        Project project = new Project(id, name, 0);
+        for (int i = 0 ;i < id_list.size(); i++) {
+            Employee emp = emp_controller.getEmployeeById(id_list.get(i));
+            project.addEmployee(emp);
+        }
+        String response = project_controller.createProject(project);
+        System.out.println(response);
+    }
+
 }

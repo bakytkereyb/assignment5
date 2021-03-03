@@ -8,6 +8,12 @@ public abstract class Employee {
     private String EmpType;
     private int Salary;
 
+    public Employee(String Name, String Address, String Department, int Salary){
+        setName(Name);
+        setAddress(Address);
+        setDepartment(Department);
+        setSalary(Salary);
+    }
     public Employee(int EmpId, String Name, String Address, String Department, int Salary){
         setEmpId(EmpId);
         setName(Name);
@@ -23,7 +29,7 @@ public abstract class Employee {
         return Department;
     }
 
-    public void setEmpId(int id){
+    public void setEmpId(int EmpId){
         this.EmpId = EmpId;
     }
     public int getEmpId(){
@@ -59,13 +65,10 @@ public abstract class Employee {
     }
 
     public abstract String getWorkStatus();
-    public abstract String getResponsibility();
 
     public String getInfo(){
         String out = "";
-        out += "Employee "+ getName()+ " with id "+getEmpId() + "\n";
-        out += "Address: "+ getAddress() + "\n";
-        out += "Department: " +getDepartment() + "\n";
+        out += getEmpId() + " | " + getName()+ " | "+ getAddress() + " | " + getDepartment() + " | ";
         return out;
     }
 

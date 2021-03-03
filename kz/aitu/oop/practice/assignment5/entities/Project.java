@@ -6,7 +6,7 @@ public class Project {
     private int Id;
     private String Name;
     private int TotalCost;
-    private ArrayList<Employee> Employees;
+    private ArrayList<Employee> Employees = new ArrayList<>();
 
     public Project(int Id, String Name, int TotalCost) {
         setId(Id);
@@ -46,5 +46,13 @@ public class Project {
 
     public int getTotalCost() {
         return TotalCost;
+    }
+
+    public String getInfo() {
+        String out = "";
+        out += getId() + " | ";
+        out += getName() + " | ";
+        out += getTotalCost() + " | ";
+        return out;
     }
 }

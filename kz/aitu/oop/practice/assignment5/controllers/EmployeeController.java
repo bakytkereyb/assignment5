@@ -24,4 +24,10 @@ public class EmployeeController {
         return employees;
     }
 
+    public Employee getEmployeeById(int id) {
+        Employee employee = repo.getEmployeeById(id);
+
+        return employee;
+    }
+
 }

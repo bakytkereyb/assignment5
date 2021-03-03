@@ -20,7 +20,7 @@ public class ProjectRepository implements IProjectRepository {
         Connection con = null;
         try {
             con = db.getConnection();
-            String InsertStatement_project = "INSERT INTO projects(id, name, totalCost) VALUES (?,?,?);";
+            String InsertStatement_project = "INSERT INTO projects(project_id, name, totalCost) VALUES (?,?,?);";
             PreparedStatement st = con.prepareStatement(InsertStatement_project);
 
             st.setInt(1, project.getId());

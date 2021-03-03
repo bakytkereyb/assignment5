@@ -6,23 +6,21 @@ public class FrontendDeveloper extends Employee{
         super(EmpId, Name, Address, Department, Salary);
         super.setType("Frontend Developer");
     }
-
-    @Override
-    public String getWorkStatus() {
-        return super.getName() + " works in IT company as " + getType();
+    public FrontendDeveloper(String Name, String Address, String Department, int Salary){
+        super(Name, Address, Department, Salary);
+        super.setType("Frontend Developer");
     }
 
     @Override
-    public String getResponsibility() {
-        return "This employee writes HTML and CSS pages.";
+    public String getWorkStatus() {
+        return getType();
     }
 
     @Override
     public String getInfo(){
         String out = super.getInfo();
-        out += getWorkStatus() + " in " + getDepartment() + " department" + "\n";
-        out += getSalary() + "\n";
-        out += getResponsibility() + "\n";
+        out += getWorkStatus() + " | ";
+        out += getSalary() + " | ";
         return out;
     }
 }

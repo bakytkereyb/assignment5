@@ -105,4 +105,64 @@ public class EmployeeRepository implements IEmployeeRepository {
         return null;
     }
 
+    @Override
+    public Employee getEmployeeById(int id) {
+        Connection con = null;
+        try {
+            con = db.getConnection();
+            String SelectStatement = "SELECT * FROM employees WHERE emp_id=?";
+            PreparedStatement st = con.prepareStatement(SelectStatement);
+
+            st.setInt(1, id);
+
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                if (rs.getString("empType").equals("Frontend Developer")) {
+                    Employee employee = new FrontendDeveloper(
+                            rs.getInt("emp_id"),
+                            rs.getString("name"),
+                            rs.getString("address"),
+                            rs.getString("department"),
+                            rs.getInt("salary"));
+
+                    return employee;
+                }
+
+                if (rs.getString("empType").equals("Backend Developer")) {
+                    Employee employee = new BackendDeveloper(
+                            rs.getInt("emp_id"),
+                            rs.getString("name"),
+                            rs.getString("address"),
+                            rs.getString("department"),
+                            rs.getInt("salary"));
+
+                    return employee;
+                }
+
+                if (rs.getString("empType").equals("Manager")) {
+                    Employee employee = new Manager(
+                            rs.getInt("emp_id"),
+                            rs.getString("name"),
+                            rs.getString("address"),
+                            rs.getString("department"),
+                            rs.getInt("salary"));
+
+                    return employee;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 }

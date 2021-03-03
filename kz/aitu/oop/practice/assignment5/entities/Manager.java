@@ -6,23 +6,21 @@ public class Manager extends Employee{
         super(EmpId, Name, Address, Department, Salary);
         super.setType("Manager");
     }
-
-    @Override
-    public String getWorkStatus() {
-        return super.getName() + " works in IT company as " + getType();
+    public Manager(String Name, String Address, String Department, int Salary){
+        super(Name, Address, Department, Salary);
+        super.setType("Manager");
     }
 
     @Override
-    public String getResponsibility() {
-        return "This employee checks and manages the whole process of project.";
+    public String getWorkStatus() {
+        return getType();
     }
 
     @Override
     public String getInfo(){
         String out = super.getInfo();
-        out += getWorkStatus() + " in " + getDepartment() + " department" + "\n";
-        out += getSalary() + "\n";
-        out += getResponsibility() + "\n";
+        out += getWorkStatus() + " | ";
+        out += getSalary() + " | ";
         return out;
     }
 }

@@ -6,23 +6,22 @@ public class BackendDeveloper extends Employee{
         super(EmpId, Name, Address, Department, Salary);
         super.setType("Backend Developer");
     }
+    public BackendDeveloper(String Name, String Address, String Department, int Salary){
+        super(Name, Address, Department, Salary);
+        super.setType("Backend Developer");
+    }
 
     @Override
     public String getWorkStatus() {
-        return super.getName() + " works in IT company as " + getType();
+        return getType();
     }
 
-    @Override
-    public String getResponsibility() {
-        return "This employee writes Java.";
-    }
 
     @Override
     public String getInfo(){
         String out = super.getInfo();
-        out += getWorkStatus() + " in " + getDepartment() + " department" + "\n";
-        out += getSalary() + "\n";
-        out += getResponsibility() + "\n";
+        out += getWorkStatus() + " | ";
+        out += getSalary() + " | ";
         return out;
     }
 }
